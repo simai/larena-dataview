@@ -1,0 +1,19 @@
+package: larena/dataview
+title: Larena Dataview
+status: repository_prepared
+cluster: frontend-composition
+batch: batch-0-clean-pre-codegen-baseline
+features:
+  - dataview.action_interaction_policy
+  - dataview.calendar_view
+  - dataview.gantt_view
+  - dataview.kanban_view
+  - dataview.saved_views_personalization
+  - dataview.source_provider_contract
+  - dataview.table_view
+  - dataview.view_descriptor_registry
+runtime:
+  php: "^8.3"
+  laravel: "^13.0"
+evidence:
+  path: docs/project-management/evidence/frontend-composition/batch-0/dataview-clean-baseline/
