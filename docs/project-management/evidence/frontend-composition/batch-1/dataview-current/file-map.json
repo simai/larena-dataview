@@ -1,0 +1,33 @@
+{
+  "schema": "larena.evidence_file_map.v1",
+  "package": "larena/dataview",
+  "launch_record_ref": "specs/implementation-planning/launch-records/dataview-batch-1-contract-skeletons-current.json",
+  "files": [
+    ".larena/launch-context.json",
+    "phpstan.neon.dist",
+    "scripts/lint.php",
+    "scripts/test-placeholder.php",
+    "scripts/validate-larena-package.php",
+    "src/Contracts/DataviewActionPolicy.php",
+    "src/Contracts/DataviewFieldDescriptor.php",
+    "src/Contracts/DataviewRuntime.php",
+    "src/Contracts/DataviewSavedView.php",
+    "src/Contracts/DataviewSourceDescriptor.php",
+    "src/Contracts/DataviewViewDescriptor.php",
+    "src/Contracts/DataviewViewProjection.php",
+    "src/Enums/DataviewActionMode.php",
+    "src/Enums/DataviewSavedViewScope.php",
+    "src/Enums/DataviewViewType.php",
+    "tests/Unit/DataviewContractTest.php",
+    "tests/Unit/DataviewFailsClosedTest.php",
+    "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/README.md",
+    "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/implementation-summary.md",
+    "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/tests.md",
+    "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/smoke.md",
+    "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/file-map.json",
+    "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/deviations.json",
+    "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/graph-sync-proposal.json",
+    "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/independent-review.md",
+    "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/code-review-feedback.md"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "larena.graph_sync_proposal.v1",
+  "package": "larena/dataview",
+  "launch_record_ref": "specs/implementation-planning/launch-records/dataview-batch-1-contract-skeletons-current.json",
+  "canonical_update_allowed": false,
+  "must_not_apply_automatically": true,
+  "status": "no_canonical_graph_change_requested",
+  "summary": "The batch implemented the planned interface-first contract skeleton. No canonical graph or package spec changes are requested.",
+  "accepted_updates": [],
+  "deferred_items": [
+    "Define first source provider fixtures before query runtime.",
+    "Define renderer adapter fixtures for table, kanban, calendar and gantt before UI runtime.",
+    "Add access/audit/source-validation integration tests before inline edit or drag/drop actions.",
+    "Define saved view persistence and privacy model before storage runtime.",
+    "Add ordinary-hosting query budget and cache policy before heavy aggregations."
+  ]
+}
