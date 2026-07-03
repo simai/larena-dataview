@@ -6,5 +6,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 require __DIR__ . '/../tests/Unit/DataviewContractTest.php';
 require __DIR__ . '/../tests/Unit/DataviewFailsClosedTest.php';
+require __DIR__ . '/../tests/Unit/ReadOnlyDataviewTableAdapterTest.php';
 
 echo "Larena Dataview contract skeleton tests passed.\n";

@@ -42,6 +42,8 @@
     "scripts/validate-larena-package.php",
     "src/Contracts/DataviewActionPolicy.php",
     "src/Contracts/DataviewFieldDescriptor.php",
+    "src/Contracts/DataviewReadOnlyTableAdapterResult.php",
+    "src/Contracts/DataviewReadOnlyTableDefinition.php",
     "src/Contracts/DataviewRuntime.php",
     "src/Contracts/DataviewSavedView.php",
     "src/Contracts/DataviewSourceDescriptor.php",
@@ -50,8 +52,10 @@
     "src/Enums/DataviewActionMode.php",
     "src/Enums/DataviewSavedViewScope.php",
     "src/Enums/DataviewViewType.php",
+    "src/Runtime/ReadOnlyDataviewTableAdapter.php",
     "tests/Unit/DataviewContractTest.php",
-    "tests/Unit/DataviewFailsClosedTest.php"
+    "tests/Unit/DataviewFailsClosedTest.php",
+    "tests/Unit/ReadOnlyDataviewTableAdapterTest.php"
   ],
   "forbidden_files": [
     "config/*",
