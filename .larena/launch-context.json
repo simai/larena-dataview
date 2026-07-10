@@ -1,7 +1,7 @@
 {
   "schema": "larena.package_launch_context.v1",
   "package": "larena/dataview",
-  "launch_record_ref": "specs/implementation-planning/launch-records/dataview-batch-1-contract-skeletons-current.json",
+  "launch_record_ref": "/Users/rim/Documents/GitHub/larena/docs/project-management/launch-records/admin-ui-runtime-dataview-pages-users.json",
   "specs_repo": "simai/larena-specs",
   "specs_commit": "7cb601d4bafcd6931544dad0d1804485a75e9fd6",
   "base_commit": "54d23ae50b707084e6be4666b2844e4a8130000b",
@@ -53,9 +53,14 @@
     "src/Enums/DataviewSavedViewScope.php",
     "src/Enums/DataviewViewType.php",
     "src/Runtime/ReadOnlyDataviewTableAdapter.php",
+    "src/Contracts/DataviewPagination.php",
+    "src/Contracts/DataviewSourceProvider.php",
+    "src/Contracts/DataviewTablePage.php",
+    "src/Runtime/DataviewTableRuntime.php",
     "tests/Unit/DataviewContractTest.php",
     "tests/Unit/DataviewFailsClosedTest.php",
-    "tests/Unit/ReadOnlyDataviewTableAdapterTest.php"
+    "tests/Unit/ReadOnlyDataviewTableAdapterTest.php",
+    "tests/Unit/DataviewTableRuntimeTest.php"
   ],
   "forbidden_files": [
     "config/*",
@@ -72,7 +77,6 @@
     "src/Resolvers/ProductionSourceResolver.php"
   ],
   "forbidden_behavior": [
-    "source_query_runtime",
     "renderer_adapter_implementation",
     "inline_edit_runtime",
     "drag_drop_mutation_runtime",
@@ -86,7 +90,7 @@
   ],
   "evidence_path": "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/",
   "graph_sync_proposal_path": "docs/project-management/evidence/frontend-composition/batch-1/dataview-current/graph-sync-proposal.json",
-  "status": "contract_skeleton_review_passed",
+  "status": "coding_started",
   "coding_started": true,
   "repository_enforcement_installed": true,
   "review_completed": true,
