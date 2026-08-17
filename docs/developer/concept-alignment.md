@@ -16,9 +16,9 @@ Accepted Target State: `larena.target.minimal_cms_v1` at semantic digest `sha256
 
 Existing view definitions remain where compatible. B2 establishes the lower dependency graph; B10 completes six registered descriptors plus shared filtering, sorting, pagination and interaction policy.
 
-## B2 alignment status
+## B10 alignment status
 
-Core and Property are now the exact mandatory Larena Composer dependencies. B10 must still demonstrate all six views over one query result without persistence side tables.
+Core and Property remain the exact mandatory Larena Composer dependencies. B10 loads one access-filtered dataset snapshot, applies shared filtering, sorting and pagination once, and projects that same immutable result through six registered descriptor types. Type-specific roles are validated for cards, calendar, kanban, Gantt and tree; Dataview creates no persistence tables.
 
 ## Install and rollback baseline
 

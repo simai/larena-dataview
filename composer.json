@@ -37,6 +37,7 @@
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/DataviewFailsClosedTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/ReadOnlyDataviewTableAdapterTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/DataviewTableRuntimeTest.php",
+      "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/DataviewSixViewRuntimeTest.php",
       "@php tests/Unit/MinimalCmsDependencyContractTest.php"
     ],
     "test:unit": [

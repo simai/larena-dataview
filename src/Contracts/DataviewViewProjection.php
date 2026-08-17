@@ -16,6 +16,7 @@ final readonly class DataviewViewProjection
         public DataviewActionPolicy $interactionPolicy,
         public array $explain,
         public bool $ownsSourceData = false,
+        public ?string $sourceSnapshotId = null,
     ) {
     }
 

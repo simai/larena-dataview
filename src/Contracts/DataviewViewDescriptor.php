@@ -10,6 +10,7 @@ final readonly class DataviewViewDescriptor
 {
     /**
      * @param list<DataviewFieldDescriptor> $fields
+     * @param array<string, string> $options
      */
     public function __construct(
         public string $viewKey,
@@ -17,6 +18,7 @@ final readonly class DataviewViewDescriptor
         public DataviewViewType $type,
         public array $fields,
         public bool $capabilityUnlocked = true,
+        public array $options = [],
     ) {
     }
 
@@ -36,6 +38,34 @@ final readonly class DataviewViewDescriptor
             }
         }
 
+        $fieldKeys = array_map(static fn (DataviewFieldDescriptor $field): string => $field->fieldKey, $this->fields);
+        foreach ($this->options as $role => $fieldKey) {
+            if (!DataviewSourceDescriptor::isStableKey($role)
+                || !DataviewSourceDescriptor::isStableKey($fieldKey)
+                || !in_array($fieldKey, $fieldKeys, true)) {
+                return false;
+            }
+        }
+
+        foreach ($this->requiredOptionRoles() as $role) {
+            if (!isset($this->options[$role])) {
+                return false;
+            }
+        }
+
         return true;
+    }
+
+    /** @return list<string> */
+    private function requiredOptionRoles(): array
+    {
+        return match ($this->type) {
+            DataviewViewType::Table => [],
+            DataviewViewType::Cards => ['title'],
+            DataviewViewType::Calendar => ['date'],
+            DataviewViewType::Kanban => ['lane'],
+            DataviewViewType::Gantt => ['start', 'end'],
+            DataviewViewType::Tree => ['id', 'parent'],
+        };
     }
 }

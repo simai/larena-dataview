@@ -2,18 +2,21 @@ package: larena/dataview
 title: Larena Dataview
 status: coding_started
 cluster: frontend-composition
-batch: larena-minimal-cms-v1-b2
+batch: larena-minimal-cms-v1-b10
 features:
   - dataview.action_interaction_policy
   - dataview.calendar_view
+  - dataview.cards_view
   - dataview.gantt_view
   - dataview.kanban_view
   - dataview.saved_views_personalization
   - dataview.source_provider_contract
   - dataview.table_view
+  - dataview.tree_view
   - dataview.view_descriptor_registry
+  - dataview.access_filtered_dataset_snapshot
 runtime:
   php: "^8.3"
   laravel: "^13.0"
 evidence:
-  path: docs/project-management/evidence/larena-minimal-cms-v1-b2
+  path: docs/project-management/evidence/larena-minimal-cms-v1-b10

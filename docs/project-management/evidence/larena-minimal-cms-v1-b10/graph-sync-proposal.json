@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0.0",
+  "proposal": "Record the completed six-view read-only Dataview projection over one access-filtered dataset snapshot.",
+  "canonical_update_allowed": false,
+  "semantic_change": false
+}

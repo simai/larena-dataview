@@ -4,6 +4,10 @@
 
 ### Changed
 
+- Completed Minimal CMS B10 with one access-filtered dataset snapshot projected as table, cards, calendar, kanban, Gantt and tree.
+- Added shared filtering, deterministic sorting, pagination and interaction policy across all six descriptors.
+- Added type-specific field-role validation and explicit proof that Dataview neither owns nor persists source records.
+
 - Added Core and Property as Dataview's exact mandatory Larena Composer dependencies and pinned lock resolution to the supported PHP 8.3 platform.
 
 ### Documentation
