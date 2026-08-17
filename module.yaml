@@ -1,8 +1,8 @@
 package: larena/dataview
 title: Larena Dataview
-status: developer_vertical_slice
+status: coding_started
 cluster: frontend-composition
-batch: batch-0-clean-pre-codegen-baseline
+batch: larena-minimal-cms-v1-b2
 features:
   - dataview.action_interaction_policy
   - dataview.calendar_view
@@ -16,4 +16,4 @@ runtime:
   php: "^8.3"
   laravel: "^13.0"
 evidence:
-  path: docs/project-management/evidence/frontend-composition/batch-0/dataview-clean-baseline/
+  path: docs/project-management/evidence/larena-minimal-cms-v1-b2
