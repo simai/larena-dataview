@@ -10,7 +10,10 @@
   "semantic_digest": "sha256:2793f61ba9563839831d57e87ac5cd6399c37a3183f1a68981b6fc7f941a1ad2",
   "base_commit": "b9c5f9456c5b773d730484f6e9d201e87c378bfd",
   "selected_features": [
-    "minimal_cms_six_view_projection"
+    "minimal_cms_six_view_projection",
+    "canonical_descriptor_persistence",
+    "descriptor_version_history",
+    "descriptor_rollback"
   ],
   "allowed_files": [
     ".larena/launch-context.json",
@@ -25,8 +28,14 @@
     "src/Contracts/DataviewQuery.php",
     "src/Contracts/DataviewViewDescriptor.php",
     "src/Contracts/DataviewViewProjection.php",
+    "src/Contracts/DataviewDescriptorStore.php",
+    "src/Persistence/PdoDataviewDescriptorStore.php",
+    "src/Runtime/DataviewDescriptorNormalizer.php",
     "src/Runtime/DataviewDatasetRuntime.php",
     "src/Runtime/DataviewSixViewRuntime.php",
+    "src/ValueObjects/DataviewDescriptorRevision.php",
+    "tests/Integration/DataviewDescriptorPersistenceTest.php",
+    "tests/Unit/DataviewDescriptorNormalizerTest.php",
     "tests/Unit/DataviewSixViewRuntimeTest.php"
   ],
   "forbidden_files": [
