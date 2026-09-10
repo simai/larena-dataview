@@ -1,0 +1,22 @@
+{
+  "schema": "larena.package_launch_record.v1",
+  "id": "larena-dataview-developer-workbench-v1-dataview",
+  "goal": "larena-dataview-developer-workbench-v1",
+  "package": "larena/dataview",
+  "branch": "main",
+  "base_commit": "7d264ad7254dcd76e166708da457933f78169fc9",
+  "scope": "Provide the deterministic backend-owned dataset, typed filter schema, safe query evaluator, pagination and package defaults used by the full Data View developer workbench.",
+  "allowed_files": [
+    "src/Developer/DataviewWorkbenchFixture.php",
+    "tests/Unit/DataviewWorkbenchFixtureTest.php",
+    "docs/project-management/launch-records/larena-dataview-developer-workbench-v1.json"
+  ],
+  "forbidden": ["browser-owned records", "access bypass", "production deployment", "public release"],
+  "runtime_boundary": "local package tests and authenticated larena.test developer workbench only",
+  "target_id": "larena.target.dataview_developer_workbench_v1",
+  "semantic_digest": "sha256:679476f524c6734e435e0b9b4003ba0e350e1f6746248ce9aa1bb5928c04c897",
+  "evidence": "source/workflow/2026-08-22-larena-dataview-developer-workbench-v1.md",
+  "rollback": "Remove the fixture, its unit test and this launch record; no domain data is changed.",
+  "production_ready": false,
+  "status": "focused_checks_passed"
+}
