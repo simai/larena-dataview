@@ -20,3 +20,5 @@ Full native quality gate passed with `RegisteredSearchTest`: configured PHPStan,
 ## Smart query codec continuation — 2026-09-16
 
 Full native quality gate passed: 49 PHP files linted, configured PHPStan, every unit/integration test, Minimal CMS dependency, evidence and scope. The new codec test preserves opaque IDs, inactive filters, integer zero and canonical decimal controls, and rejects twelve malformed requests. The isolated Root tests pass actual wire envelopes through both domain adapters; no browser event acceptance is implied.
+
+The protected-endpoint continuation also rejects explicit null envelope fields instead of replacing them with defaults. The full native gate passed again; codec refusals now total sixteen.

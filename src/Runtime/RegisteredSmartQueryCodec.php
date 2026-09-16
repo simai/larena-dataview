@@ -20,11 +20,11 @@ final class RegisteredSmartQueryCodec
         $validator = new RegisteredQueryValidator();
         $validator->assertAllowed(new DataviewQuery(), $fields, $searchFields);
         if (array_diff(array_keys($wire), ['search', 'filters', 'sort', 'page', 'page_size']) !== []) $this->reject();
-        $page = $wire['page'] ?? 1;
-        $size = $wire['page_size'] ?? 20;
-        $search = $wire['search'] ?? '';
-        $rawFilters = $wire['filters'] ?? [];
-        $sort = $wire['sort'] ?? [];
+        $page = array_key_exists('page', $wire) ? $wire['page'] : 1;
+        $size = array_key_exists('page_size', $wire) ? $wire['page_size'] : 20;
+        $search = array_key_exists('search', $wire) ? $wire['search'] : '';
+        $rawFilters = array_key_exists('filters', $wire) ? $wire['filters'] : [];
+        $sort = array_key_exists('sort', $wire) ? $wire['sort'] : [];
         if (!is_int($page) || !is_int($size) || !is_string($search) || !is_array($rawFilters)
             || ($rawFilters !== [] && array_is_list($rawFilters)) || !is_array($sort) || !array_is_list($sort)
             || count($rawFilters) > 20) $this->reject();

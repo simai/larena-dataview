@@ -27,7 +27,7 @@ $zero = $codec->decode(['filters' => ['count' => ['operator' => 'gte', 'value' =
 assert($zero->filters[0]['value'] === 0);
 $textZero = $codec->decode(['filters' => ['count' => ['operator' => 'gte', 'value' => '0']]], $fields);
 assert($textZero->filters[0]['value'] === 0);
-$bad = [['endpoint' => '/unsafe'], ['page' => '2'], ['page_size' => 101], ['search' => []],
+$bad = [['page' => null], ['search' => null], ['filters' => null], ['sort' => null], ['endpoint' => '/unsafe'], ['page' => '2'], ['page_size' => 101], ['search' => []],
     ['sort' => ['title' => 'asc']], ['sort' => ['bad']],
     ['filters' => ['missing' => ['operator' => 'eq', 'value' => 'x']]],
     ['filters' => ['title' => ['operator' => 'eq', 'value' => 'x', 'values' => ['x']]]],
@@ -39,4 +39,4 @@ foreach ($bad as $wire) {
     try { $codec->decode($wire, $fields, ['title']); throw new RuntimeException('Malformed Smart query accepted.'); }
     catch (InvalidArgumentException) {}
 }
-echo "RegisteredSmartQueryCodecTest passed: typed public query, opaque IDs, inactive controls, zero and twelve refusals.\n";
+echo "RegisteredSmartQueryCodecTest passed: typed public query, opaque IDs, inactive controls, zero and sixteen refusals.\n";
