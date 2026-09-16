@@ -29,3 +29,11 @@ The initial Root Storage bridge supports equality filters and native owner sorti
 In-memory sources are searched only after their owner's authorized read. Owner-paged providers declare their exact native `searchFields()` set; a different caller registration fails before the owner page request. The Storage bridge additionally checks that the native structure's whole searchable set equals its registered projection, refusing unprojected-field influence. It does not relabel field `contains` as global search. Snapshot identity includes search and its trusted field set. Existing constructors remain compatible through the trailing optional parameter.
 
 `RegisteredSearchTest` covers OR across trusted fields, AND with filters, literal symbols, Unicode, snapshot differences, bounds and refusals before row reads. This is server-contract evidence; interactive acceptance still requires the Composite Smart list and Chrome scenarios.
+
+## Public Smart query envelope
+
+Use `RegisteredSmartQueryCodec::decode(wire, fields, searchFields)` between the public host request and registered dataset runtime. The envelope accepts only `search`, `filters`, `sort`, `page`, `page_size`. Page/size are JSON integers, sort is a list, and filters are keyed by registered fields with explicit supported `operator` and exactly one `value`/`values`. Empty/null control values are explicitly inactive; unknown fields/operators are rejected even when inactive. `values` requires `in`.
+
+The codec preserves opaque identifiers and string values. Only declared integer fields accept canonical decimal strings from text controls, with overflow checking; it never guesses identifier types, silently truncates decimals, or accepts executable metadata. Zero is an active value. Common field/value validation remains in RegisteredQueryValidator. This codec implements the currently inspected host envelope, not unaccepted Framework action ports or sorting events.
+
+Tests include twelve malformed-envelope refusals and Root integration of the same envelope with both Auth and Storage. Existing fixture endpoints have not been silently changed. A universal presentation/source registry, protected endpoints, actual Chrome events and preferences still need product acceptance.

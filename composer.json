@@ -56,7 +56,8 @@
       "@php tests/Unit/MinimalCmsDependencyContractTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/RegisteredQueryBoundaryTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/RegisteredPagedSourceTest.php",
-      "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/RegisteredSearchTest.php"
+      "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/RegisteredSearchTest.php",
+      "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/RegisteredSmartQueryCodecTest.php"
     ],
     "test:unit": [
       "@test"

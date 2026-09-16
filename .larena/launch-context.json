@@ -25,7 +25,9 @@
     "src/Contracts/DataviewPagedSourceProvider.php",
     "tests/Unit/RegisteredPagedSourceTest.php",
     "src/Contracts/DataviewQuery.php",
-    "tests/Unit/RegisteredSearchTest.php"
+    "tests/Unit/RegisteredSearchTest.php",
+    "src/Runtime/RegisteredSmartQueryCodec.php",
+    "tests/Unit/RegisteredSmartQueryCodecTest.php"
   ],
   "forbidden_files": [
     "config/*",
