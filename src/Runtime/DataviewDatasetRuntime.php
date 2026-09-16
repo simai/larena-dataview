@@ -35,7 +35,7 @@ final class DataviewDatasetRuntime
         $page = min($query->page, $candidate->lastPage());
         $pagination = new DataviewPagination($page, $query->perPage, $total);
         $slice = array_slice($rows, ($page - 1) * $query->perPage, $query->perPage);
-        $snapshotPayload = [$source->sourceKey, $query->normalizedFilters(), $query->normalizedSort(), $pagination->page, $pagination->perPage, $slice];
+        $snapshotPayload = [$source->sourceKey, $query->normalizedFilters(), $query->normalizedSort(), $pagination->page, $pagination->perPage, $pagination->total, $slice];
 
         return new DataviewDatasetSnapshot(
             'sha256:'.hash('sha256', json_encode($snapshotPayload, JSON_THROW_ON_ERROR)),

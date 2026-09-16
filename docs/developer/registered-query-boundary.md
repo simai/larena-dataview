@@ -11,3 +11,5 @@ The source supplies access-filtered normalized scalar query rows. Complex displa
 Legacy `load` remains compatible and does not automatically inherit this guard. Existing HTTP consumers must adopt the guarded path explicitly and pass direct-request ACL/query tests. The current in-memory dataset runtime is retained; server-side pagination support is separate work, not claimed by this guard.
 
 Pending: two real domain adapters, public interaction ports, SSR/hydration, action idempotency, HTTP and Chrome acceptance, Specs/Docs mappings and exact Framework 1.0.1 supply. This is not interactive list readiness.
+
+Dataset snapshot identity includes total count as well as the effective page, size, query and visible rows. A count change invalidates identity even if the visible slice is unchanged. Old cached IDs are naturally superseded; no persisted descriptor migration is required.

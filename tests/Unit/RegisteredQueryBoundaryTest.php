@@ -14,10 +14,13 @@ use Larena\Dataview\Runtime\DataviewDatasetRuntime;
 
 $source = new class implements DataviewSourceProvider {
     public int $reads = 0;
+    public bool $includeThird = false;
     public function descriptor(): DataviewSourceDescriptor { return new DataviewSourceDescriptor('content.records', 'larena/storage', true); }
     public function rows(): array {
         $this->reads++;
-        return [['record_id' => 'record_Привет_1', 'title' => 'Alpha', 'score' => 20], ['record_id' => 'record_2', 'title' => 'Beta', 'score' => 10]];
+        $rows = [['record_id' => 'record_Привет_1', 'title' => 'Alpha', 'score' => 20], ['record_id' => 'record_2', 'title' => 'Beta', 'score' => 10]];
+        if ($this->includeThird) $rows[] = ['record_id' => 'record_3', 'title' => 'Gamma', 'score' => 30];
+        return $rows;
     }
 };
 $fields = ['record_id' => ['type' => 'identifier', 'operators' => ['eq', 'in'], 'sortable' => false],
@@ -30,6 +33,11 @@ assert($selected->rows[0]['record_id'] === 'record_Привет_1');
 $sorted = $runtime->loadRegistered($source, new DataviewQuery([], [['field' => 'score', 'direction' => 'asc']], 1, 1), $fields);
 assert($sorted->rows[0]['record_id'] === 'record_2');
 assert($sorted->pagination->total === 2);
+$source->includeThird = true;
+$changedCount = $runtime->loadRegistered($source, new DataviewQuery([], [['field' => 'score', 'direction' => 'asc']], 1, 1), $fields);
+assert($sorted->rows === $changedCount->rows);
+assert($changedCount->pagination->total === 3);
+assert($sorted->snapshotId !== $changedCount->snapshotId, 'Count changes must invalidate dataset snapshot even when visible rows stay equal.');
 $queries = [new DataviewQuery([['field' => 'secret', 'operator' => 'eq', 'value' => 'x']]),
     new DataviewQuery([['field' => 'record_id', 'operator' => 'contains', 'value' => 'record']]),
     new DataviewQuery([['field' => 'score', 'operator' => 'gte', 'value' => '10']]),
