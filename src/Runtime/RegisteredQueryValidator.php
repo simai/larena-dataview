@@ -11,8 +11,11 @@ use Larena\Dataview\Contracts\DataviewSourceDescriptor;
 /** Field contracts come from trusted source registrations, never request JSON. */
 final class RegisteredQueryValidator
 {
-    /** @param array<string,mixed> $fields Raw server-owned registrations; validate their structure before use. */
-    public function assertAllowed(DataviewQuery $query, array $fields): void
+    /**
+     * @param array<string,mixed> $fields Raw server-owned registrations; validate their structure before use.
+     * @param array<array-key,mixed> $searchFields Raw trusted registration of fields for case-insensitive literal substring OR search.
+     */
+    public function assertAllowed(DataviewQuery $query, array $fields, array $searchFields = []): void
     {
         if (!$query->isValid() || count($query->filters) > 20 || count($query->sort) > 4 || $fields === []) {
             throw new InvalidArgumentException('dataview_registered_query_invalid');
@@ -34,6 +37,12 @@ final class RegisteredQueryValidator
             }
             if (count(array_unique($field['operators'])) !== count($field['operators'])) throw new InvalidArgumentException('dataview_field_registration_invalid');
         }
+        if (!array_is_list($searchFields)) throw new InvalidArgumentException('dataview_search_registration_invalid');
+        foreach ($searchFields as $name) {
+            if (!is_string($name) || !isset($fields[$name]) || $fields[$name]['type'] !== 'string') throw new InvalidArgumentException('dataview_search_registration_invalid');
+        }
+        if (count(array_unique($searchFields)) !== count($searchFields)) throw new InvalidArgumentException('dataview_search_registration_invalid');
+        if ($query->search !== null && $searchFields === []) throw new InvalidArgumentException('dataview_search_not_registered');
         foreach ($query->filters as $filter) {
             if (array_diff(array_keys($filter), ['field', 'operator', 'value']) !== []) throw new InvalidArgumentException('dataview_filter_fields_invalid');
             $field = $fields[$filter['field']] ?? null;

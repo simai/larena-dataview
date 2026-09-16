@@ -23,7 +23,9 @@
     "tests/Unit/RegisteredQueryBoundaryTest.php",
     "docs/developer/registered-query-boundary.md",
     "src/Contracts/DataviewPagedSourceProvider.php",
-    "tests/Unit/RegisteredPagedSourceTest.php"
+    "tests/Unit/RegisteredPagedSourceTest.php",
+    "src/Contracts/DataviewQuery.php",
+    "tests/Unit/RegisteredSearchTest.php"
   ],
   "forbidden_files": [
     "config/*",

@@ -13,19 +13,32 @@ use Larena\Dataview\Contracts\DataviewSourceProvider;
 
 final class DataviewDatasetRuntime
 {
-    /** @param array<string,array{type:string,operators:list<string>,sortable:bool}> $fields */
-    public function loadRegistered(DataviewSourceProvider $provider, DataviewQuery $query, array $fields): DataviewDatasetSnapshot
+    /**
+     * @param array<string,array{type:string,operators:list<string>,sortable:bool}> $fields
+     * @param list<string> $searchFields
+     */
+    public function loadRegistered(DataviewSourceProvider $provider, DataviewQuery $query, array $fields, array $searchFields = []): DataviewDatasetSnapshot
     {
-        (new RegisteredQueryValidator())->assertAllowed($query, $fields);
-        return $this->load($provider, $query);
+        (new RegisteredQueryValidator())->assertAllowed($query, $fields, $searchFields);
+        return $this->load($provider, $query, $searchFields);
     }
 
-    /** @param array<string,array{type:string,operators:list<string>,sortable:bool}> $fields */
-    public function loadRegisteredPage(DataviewPagedSourceProvider $provider, DataviewQuery $query, array $fields): DataviewDatasetSnapshot
+    /**
+     * @param array<string,array{type:string,operators:list<string>,sortable:bool}> $fields
+     * @param list<string> $searchFields
+     */
+    public function loadRegisteredPage(DataviewPagedSourceProvider $provider, DataviewQuery $query, array $fields, array $searchFields = []): DataviewDatasetSnapshot
     {
-        (new RegisteredQueryValidator())->assertAllowed($query, $fields);
+        (new RegisteredQueryValidator())->assertAllowed($query, $fields, $searchFields);
         $source = $provider->descriptor();
         if (!$source->isValid()) throw new InvalidArgumentException('dataview_dataset_request_invalid');
+        if ($query->search !== null) {
+            $native = $provider->searchFields();
+            sort($native);
+            $requested = $searchFields;
+            sort($requested);
+            if ($native !== $requested) throw new InvalidArgumentException('dataview_owner_search_registration_mismatch');
+        }
         $result = $provider->page($query);
         $pagination = $result->pagination;
         $expectedRows = min($pagination->perPage, max(0, $pagination->total - ($pagination->page - 1) * $pagination->perPage));
@@ -40,15 +53,16 @@ final class DataviewDatasetRuntime
         return $result;
     }
 
-    public function load(DataviewSourceProvider $provider, DataviewQuery $query): DataviewDatasetSnapshot
+    /** @param list<string> $searchFields */
+    public function load(DataviewSourceProvider $provider, DataviewQuery $query, array $searchFields = []): DataviewDatasetSnapshot
     {
         $source = $provider->descriptor();
-        if (!$source->isValid() || !$query->isValid()) {
+        if (!$source->isValid() || !$query->isValid() || ($query->search !== null && $searchFields === [])) {
             throw new InvalidArgumentException('dataview_dataset_request_invalid');
         }
 
         $rows = $provider->rows();
-        $rows = array_values(array_filter($rows, fn (array $row): bool => $this->matches($row, $query)));
+        $rows = array_values(array_filter($rows, fn (array $row): bool => $this->matches($row, $query, $searchFields)));
         $this->sort($rows, $query);
 
         $total = count($rows);
@@ -56,7 +70,7 @@ final class DataviewDatasetRuntime
         $page = min($query->page, $candidate->lastPage());
         $pagination = new DataviewPagination($page, $query->perPage, $total);
         $slice = array_slice($rows, ($page - 1) * $query->perPage, $query->perPage);
-        $snapshotPayload = [$source->sourceKey, $query->normalizedFilters(), $query->normalizedSort(), $pagination->page, $pagination->perPage, $pagination->total, $slice];
+        $snapshotPayload = [$source->sourceKey, $query->search, $searchFields, $query->normalizedFilters(), $query->normalizedSort(), $pagination->page, $pagination->perPage, $pagination->total, $slice];
 
         return new DataviewDatasetSnapshot(
             'sha256:'.hash('sha256', json_encode($snapshotPayload, JSON_THROW_ON_ERROR)),
@@ -68,8 +82,11 @@ final class DataviewDatasetRuntime
         );
     }
 
-    /** @param array<string, mixed> $row */
-    private function matches(array $row, DataviewQuery $query): bool
+    /**
+     * @param array<string, mixed> $row
+     * @param list<string> $searchFields
+     */
+    private function matches(array $row, DataviewQuery $query, array $searchFields): bool
     {
         foreach ($query->normalizedFilters() as $filter) {
             if (!array_key_exists($filter['field'], $row)) {
@@ -90,6 +107,15 @@ final class DataviewDatasetRuntime
             }
         }
 
+        if ($query->search !== null) {
+            $lower = static fn (string $value): string => function_exists('mb_strtolower') ? mb_strtolower($value, 'UTF-8') : strtolower($value);
+            $needle = $lower(trim($query->search));
+            foreach ($searchFields as $field) {
+                $value = $row[$field] ?? null;
+                if (is_string($value) && str_contains($lower($value), $needle)) return true;
+            }
+            return false;
+        }
         return true;
     }
 

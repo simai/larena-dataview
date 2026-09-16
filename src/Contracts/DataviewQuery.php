@@ -17,6 +17,7 @@ final readonly class DataviewQuery
         public array $sort = [],
         public int $page = 1,
         public int $perPage = 20,
+        public ?string $search = null,
     ) {
     }
 
@@ -25,6 +26,10 @@ final readonly class DataviewQuery
         if ($this->page < 1 || $this->perPage < 1 || $this->perPage > 100) {
             return false;
         }
+
+        if ($this->search !== null && (trim($this->search) === '' || strlen($this->search) > 100
+            || preg_match('//u', $this->search) !== 1
+            || preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', $this->search) === 1)) return false;
 
         foreach ($this->filters as $filter) {
             if (!isset($filter['field'], $filter['operator'])

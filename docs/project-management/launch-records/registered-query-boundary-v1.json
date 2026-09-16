@@ -14,7 +14,9 @@
     "tests/Unit/RegisteredQueryBoundaryTest.php",
     "docs/developer/registered-query-boundary.md",
     "src/Contracts/DataviewPagedSourceProvider.php",
-    "tests/Unit/RegisteredPagedSourceTest.php"
+    "tests/Unit/RegisteredPagedSourceTest.php",
+    "src/Contracts/DataviewQuery.php",
+    "tests/Unit/RegisteredSearchTest.php"
   ],
   "scope": "Validate registered server-owned field/operator contracts before existing dataset runtime accesses rows; no domain writes or alternate list renderer; validate owner-paged snapshots without second pagination",
   "specs_candidate": "48e31f41",

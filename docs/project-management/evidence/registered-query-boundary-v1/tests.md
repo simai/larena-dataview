@@ -10,3 +10,8 @@ A pre-fix test reproduced equal snapshot IDs for the same visible page with diff
 ## Owner-paged continuation — 2026-09-16
 
 Full native `composer quality:gate` passed after adding the generic paged interface and its unit test: validator, 46-file lint, configured PHPStan, all unit/integration suites, Minimal CMS dependency contract, evidence and scope checks. `RegisteredPagedSourceTest` proves exactly one owner-page request, preserved opaque Unicode IDs, no second slicing, five malformed output refusals and rejection before owner callbacks. Root domain integration is recorded separately; no Chrome, clean-release or production acceptance is implied.
+
+
+## Registered search continuation — 2026-09-16
+
+Full native quality gate passed with `RegisteredSearchTest`: configured PHPStan, 47-file lint, existing persistence/dependency suites and pre-read search refusals. Runtime search fields are trusted registration data; owner-paged declarations must match. No mandatory domain dependency, Framework distribution change or live rollout.

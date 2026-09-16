@@ -20,4 +20,12 @@ Dataset snapshot identity includes total count as well as the effective page, si
 
 Adapters may expose only their native supported operators. Unsupported operators, duplicate predicates that cannot be faithfully represented, and business-field/metadata collisions must fail explicitly. Never weaken a query or substitute global search for a field predicate. Optional application bridges keep Storage/Auth dependencies out of Dataview's mandatory Minimal CMS composition.
 
-The initial Root Storage bridge supports equality filters and native owner sorting/paging; it preserves scope and structure identity. Storage currently scans at most 500 records internally before paging. That limitation remains an owner optimization task, not a scalable query claim. Global search and public action ports still require their own contract acceptance.
+The initial Root Storage bridge supports equality filters and native owner sorting/paging; it preserves scope and structure identity. Storage currently scans at most 500 records internally before paging. That limitation remains an owner optimization task, not a scalable query claim. Common search is implemented locally as described below; public action ports and product browser acceptance remain pending.
+
+## Registered search continuation
+
+`DataviewQuery.search` is an optional UTF-8 literal query, nonblank, at most 100 bytes, without forbidden controls. Registered runtimes accept a trusted `searchFields` list, never one from request JSON. Search matches any registered string field; all ordinary predicates remain AND conditions. Text is trimmed and compared case-insensitively using mb_strtolower when available, otherwise ASCII strtolower. Percent and underscore have no wildcard meaning. Unicode is preserved; Unicode case folding requires mbstring in the runtime.
+
+In-memory sources are searched only after their owner's authorized read. Owner-paged providers declare their exact native `searchFields()` set; a different caller registration fails before the owner page request. The Storage bridge additionally checks that the native structure's whole searchable set equals its registered projection, refusing unprojected-field influence. It does not relabel field `contains` as global search. Snapshot identity includes search and its trusted field set. Existing constructors remain compatible through the trailing optional parameter.
+
+`RegisteredSearchTest` covers OR across trusted fields, AND with filters, literal symbols, Unicode, snapshot differences, bounds and refusals before row reads. This is server-contract evidence; interactive acceptance still requires the Composite Smart list and Chrome scenarios.

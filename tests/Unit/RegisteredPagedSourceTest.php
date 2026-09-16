@@ -17,6 +17,7 @@ $source = new class implements DataviewPagedSourceProvider {
     public function callCount(): int { return $this->calls; }
     public string $mode = 'valid';
     public function descriptor(): DataviewSourceDescriptor { return new DataviewSourceDescriptor('content.records', 'larena/storage', true); }
+    public function searchFields(): array { return []; }
     public function page(DataviewQuery $query): DataviewDatasetSnapshot {
         $this->calls++;
         $rows = [['record_id' => 'record_Привет_2', 'title' => 'Beta']];
