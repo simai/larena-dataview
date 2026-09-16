@@ -12,9 +12,11 @@
     "src/Runtime/RegisteredQueryValidator.php",
     "src/Runtime/DataviewDatasetRuntime.php",
     "tests/Unit/RegisteredQueryBoundaryTest.php",
-    "docs/developer/registered-query-boundary.md"
+    "docs/developer/registered-query-boundary.md",
+    "src/Contracts/DataviewPagedSourceProvider.php",
+    "tests/Unit/RegisteredPagedSourceTest.php"
   ],
-  "scope": "Validate registered server-owned field/operator contracts before existing dataset runtime accesses rows; no domain writes or alternate list renderer",
+  "scope": "Validate registered server-owned field/operator contracts before existing dataset runtime accesses rows; no domain writes or alternate list renderer; validate owner-paged snapshots without second pagination",
   "specs_candidate": "48e31f41",
   "forbidden": [
     "live activation",

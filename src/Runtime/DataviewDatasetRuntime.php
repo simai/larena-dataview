@@ -7,6 +7,7 @@ namespace Larena\Dataview\Runtime;
 use InvalidArgumentException;
 use Larena\Dataview\Contracts\DataviewDatasetSnapshot;
 use Larena\Dataview\Contracts\DataviewPagination;
+use Larena\Dataview\Contracts\DataviewPagedSourceProvider;
 use Larena\Dataview\Contracts\DataviewQuery;
 use Larena\Dataview\Contracts\DataviewSourceProvider;
 
@@ -17,6 +18,26 @@ final class DataviewDatasetRuntime
     {
         (new RegisteredQueryValidator())->assertAllowed($query, $fields);
         return $this->load($provider, $query);
+    }
+
+    /** @param array<string,array{type:string,operators:list<string>,sortable:bool}> $fields */
+    public function loadRegisteredPage(DataviewPagedSourceProvider $provider, DataviewQuery $query, array $fields): DataviewDatasetSnapshot
+    {
+        (new RegisteredQueryValidator())->assertAllowed($query, $fields);
+        $source = $provider->descriptor();
+        if (!$source->isValid()) throw new InvalidArgumentException('dataview_dataset_request_invalid');
+        $result = $provider->page($query);
+        $pagination = $result->pagination;
+        $expectedRows = min($pagination->perPage, max(0, $pagination->total - ($pagination->page - 1) * $pagination->perPage));
+        if (!$result->isValid() || $result->source != $source || $result->query != $query
+            || $pagination->perPage !== $query->perPage || $pagination->page > $query->page
+            || count($result->rows) !== $expectedRows) {
+            throw new InvalidArgumentException('dataview_owner_page_invalid');
+        }
+        foreach ($result->rows as $row) {
+            if (array_diff(array_keys($row), array_keys($fields)) !== []) throw new InvalidArgumentException('dataview_owner_projection_invalid');
+        }
+        return $result;
     }
 
     public function load(DataviewSourceProvider $provider, DataviewQuery $query): DataviewDatasetSnapshot

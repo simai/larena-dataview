@@ -21,7 +21,9 @@
     "src/Runtime/RegisteredQueryValidator.php",
     "src/Runtime/DataviewDatasetRuntime.php",
     "tests/Unit/RegisteredQueryBoundaryTest.php",
-    "docs/developer/registered-query-boundary.md"
+    "docs/developer/registered-query-boundary.md",
+    "src/Contracts/DataviewPagedSourceProvider.php",
+    "tests/Unit/RegisteredPagedSourceTest.php"
   ],
   "forbidden_files": [
     "config/*",
