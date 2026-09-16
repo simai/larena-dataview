@@ -1,0 +1,7 @@
+{
+  "runtime": [
+    "src/Runtime/RegisteredQueryValidator.php",
+    "src/Runtime/DataviewDatasetRuntime.php"
+  ],
+  "test": "tests/Unit/RegisteredQueryBoundaryTest.php"
+}

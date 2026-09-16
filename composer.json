@@ -28,8 +28,20 @@
     "phpstan/phpstan": "^2.0"
   },
   "repositories": [
-    {"type": "path", "url": "../core", "options": {"symlink": true}},
-    {"type": "path", "url": "../property", "options": {"symlink": true}}
+    {
+      "type": "path",
+      "url": "../core",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "../property",
+      "options": {
+        "symlink": true
+      }
+    }
   ],
   "scripts": {
     "test": [
@@ -41,7 +53,8 @@
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/DataviewWorkbenchFixtureTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/DataviewDescriptorNormalizerTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Integration/DataviewDescriptorPersistenceTest.php",
-      "@php tests/Unit/MinimalCmsDependencyContractTest.php"
+      "@php tests/Unit/MinimalCmsDependencyContractTest.php",
+      "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/RegisteredQueryBoundaryTest.php"
     ],
     "test:unit": [
       "@test"
@@ -63,7 +76,9 @@
   "config": {
     "sort-packages": true,
     "allow-plugins": {},
-    "platform": {"php": "8.3.31"}
+    "platform": {
+      "php": "8.3.31"
+    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true

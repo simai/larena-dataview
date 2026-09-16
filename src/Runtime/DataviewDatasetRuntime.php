@@ -12,6 +12,13 @@ use Larena\Dataview\Contracts\DataviewSourceProvider;
 
 final class DataviewDatasetRuntime
 {
+    /** @param array<string,array{type:string,operators:list<string>,sortable:bool}> $fields */
+    public function loadRegistered(DataviewSourceProvider $provider, DataviewQuery $query, array $fields): DataviewDatasetSnapshot
+    {
+        (new RegisteredQueryValidator())->assertAllowed($query, $fields);
+        return $this->load($provider, $query);
+    }
+
     public function load(DataviewSourceProvider $provider, DataviewQuery $query): DataviewDatasetSnapshot
     {
         $source = $provider->descriptor();

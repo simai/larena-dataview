@@ -1,0 +1,11 @@
+{
+  "status": "local_candidate",
+  "remaining": [
+    "Auth and scoped Storage adapters",
+    "HTTP ACL and query tests",
+    "Specs API mappings",
+    "actual Framework event delivery",
+    "Chrome two-instance acceptance",
+    "clean distribution"
+  ]
+}

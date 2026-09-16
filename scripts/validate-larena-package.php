@@ -61,8 +61,20 @@ if ($codingStarted) {
         '/Users/rim/Documents/GitHub/larena/docs/project-management/launch-records/admin-ui-runtime-dataview-pages-users.json',
         'docs/project-management/launch-records/larena-minimal-cms-v1-b2.json',
         'docs/project-management/launch-records/larena-minimal-cms-v1-b10.json',
+        'docs/project-management/launch-records/registered-query-boundary-v1.json',
     ], true)) {
         $errors[] = 'coding_started requires an accepted Dataview launch record.';
+    }
+    if (($launchContext['launch_record_ref'] ?? null) === 'docs/project-management/launch-records/registered-query-boundary-v1.json') {
+        $recordPath = $launchContext['launch_record_ref'];
+        $record = is_file($recordPath) ? json_decode((string) file_get_contents($recordPath), true, 512, JSON_THROW_ON_ERROR) : [];
+        foreach (['package' => 'larena/dataview', 'goal' => 'registered-query-boundary', 'status' => 'coding_started'] as $key => $expected) {
+            if (($record[$key] ?? null) !== $expected) $errors[] = 'Registered query launch record identity is invalid.';
+        }
+        if (($record['base_commit'] ?? null) !== ($launchContext['base_commit'] ?? null)
+            || ($record['allowed_files'] ?? null) !== ($launchContext['allowed_files'] ?? null)) {
+            $errors[] = 'Registered query launch scope must match the context exactly.';
+        }
     }
     $requiredContractFiles = [
         'src/Contracts/DataviewActionPolicy.php',

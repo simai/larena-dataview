@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "case": "wrong_goal",
+      "rejected": true
+    },
+    {
+      "case": "wrong_package",
+      "rejected": true
+    },
+    {
+      "case": "scope_mismatch",
+      "rejected": true
+    },
+    {
+      "case": "missing_record",
+      "rejected": true
+    }
+  ]
+}

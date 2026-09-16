@@ -1,0 +1,25 @@
+{
+  "schema": "larena.package_launch_record.v1",
+  "package": "larena/dataview",
+  "goal": "registered-query-boundary",
+  "status": "coding_started",
+  "base_commit": "685919570a7a57654528c4577bd119e436189e23",
+  "allowed_files": [
+    ".larena/launch-context.json",
+    "docs/project-management/launch-records/registered-query-boundary-v1.json",
+    "scripts/validate-larena-package.php",
+    "composer.json",
+    "src/Runtime/RegisteredQueryValidator.php",
+    "src/Runtime/DataviewDatasetRuntime.php",
+    "tests/Unit/RegisteredQueryBoundaryTest.php",
+    "docs/developer/registered-query-boundary.md"
+  ],
+  "scope": "Validate registered server-owned field/operator contracts before existing dataset runtime accesses rows; no domain writes or alternate list renderer",
+  "specs_candidate": "48e31f41",
+  "forbidden": [
+    "live activation",
+    "Framework grammar change",
+    "database migration",
+    "production readiness claim"
+  ]
+}
