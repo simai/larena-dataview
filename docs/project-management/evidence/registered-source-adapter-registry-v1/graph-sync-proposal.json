@@ -1,0 +1,8 @@
+{
+  "schema": "larena.graph_sync_proposal.v1",
+  "package": "larena/dataview",
+  "scope": "registered source adapter registry",
+  "feature_refs": ["dataview.source_provider_contract"],
+  "canonical_update_allowed": false,
+  "proposal": "Map the verified adapter registry evidence after Root integration acceptance; do not raise readiness from package-local tests alone."
+}

@@ -62,8 +62,20 @@ if ($codingStarted) {
         'docs/project-management/launch-records/larena-minimal-cms-v1-b2.json',
         'docs/project-management/launch-records/larena-minimal-cms-v1-b10.json',
         'docs/project-management/launch-records/registered-query-boundary-v1.json',
+        'docs/project-management/launch-records/registered-source-adapter-registry-v1.json',
     ], true)) {
         $errors[] = 'coding_started requires an accepted Dataview launch record.';
+    }
+    if (($launchContext['launch_record_ref'] ?? null) === 'docs/project-management/launch-records/registered-source-adapter-registry-v1.json') {
+        $recordPath = $launchContext['launch_record_ref'];
+        $record = is_file($recordPath) ? json_decode((string) file_get_contents($recordPath), true, 512, JSON_THROW_ON_ERROR) : [];
+        foreach (['package' => 'larena/dataview', 'goal' => 'registered-source-adapter-registry', 'status' => 'coding_started'] as $key => $expected) {
+            if (($record[$key] ?? null) !== $expected) $errors[] = 'Registered source adapter launch record identity is invalid.';
+        }
+        if (($record['base_commit'] ?? null) !== ($launchContext['base_commit'] ?? null)
+            || ($record['allowed_files'] ?? null) !== ($launchContext['allowed_files'] ?? null)) {
+            $errors[] = 'Registered source adapter launch scope must match the context exactly.';
+        }
     }
     if (($launchContext['launch_record_ref'] ?? null) === 'docs/project-management/launch-records/registered-query-boundary-v1.json') {
         $recordPath = $launchContext['launch_record_ref'];

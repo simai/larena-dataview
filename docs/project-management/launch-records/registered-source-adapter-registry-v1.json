@@ -1,0 +1,28 @@
+{
+  "schema": "larena.package_launch_record.v1",
+  "package": "larena/dataview",
+  "goal": "registered-source-adapter-registry",
+  "status": "coding_started",
+  "base_commit": "e62bfb5ab44e9f3fb06a7e3f30864f4c2af669fe",
+  "allowed_files": [
+    ".larena/launch-context.json",
+    "docs/project-management/launch-records/registered-source-adapter-registry-v1.json",
+    "scripts/validate-larena-package.php",
+    "composer.json",
+    "CHANGELOG.md",
+    "src/Contracts/RegisteredDataviewSourceAdapter.php",
+    "src/Runtime/RegisteredDataviewSourceRegistry.php",
+    "tests/Unit/RegisteredDataviewSourceRegistryTest.php",
+    "docs/developer/registered-source-adapters.md"
+  ],
+  "scope": "Publish a generic fail-closed registry for owner-provided Dataview source adapters; domain owners retain permissions, query execution and canonical records; no presentation registry, UI, migration or Framework change.",
+  "specs_candidate": "d08ad036",
+  "forbidden": [
+    "live activation",
+    "Framework grammar change",
+    "database migration",
+    "domain authorization ownership",
+    "presentation registry",
+    "production readiness claim"
+  ]
+}

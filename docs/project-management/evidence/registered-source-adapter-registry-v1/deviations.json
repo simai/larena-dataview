@@ -1,0 +1,10 @@
+{
+  "schema": "larena.evidence_deviations.v1",
+  "items": [
+    {
+      "id": "root-integration-pending",
+      "status": "separate_bounded_batch",
+      "reason": "Dataview owner contract must pass its package gate before Root replaces hard-coded dispatch."
+    }
+  ]
+}
