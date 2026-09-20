@@ -19,10 +19,23 @@ final readonly class DataviewSourceDescriptor
         return preg_match('/^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)*$/', $key) === 1;
     }
 
+    /** Composer package identity of the owning package; independent vendors are allowed here. */
+    public static function isOwnerPackage(string $package): bool
+    {
+        return strlen($package) <= 120
+            && preg_match('/^[a-z0-9]([_.-]?[a-z0-9]+)*\\/[a-z0-9](([_.]|-{1,2})?[a-z0-9]+)*$/', $package) === 1;
+    }
+
+    /** Owner trust is decided by the host registry, not by this identity. */
+    public function isFirstParty(): bool
+    {
+        return str_starts_with($this->ownerPackage, 'larena/');
+    }
+
     public function isValid(): bool
     {
         return self::isStableKey($this->sourceKey)
-            && str_starts_with($this->ownerPackage, 'larena/')
+            && self::isOwnerPackage($this->ownerPackage)
             && $this->accessScoped
             && !$this->ownsCanonicalRecords;
     }

@@ -66,6 +66,7 @@ final class ReadOnlyDataviewTableAdapter
             $projection->descriptor->fields,
             false,
         );
+        // Owner identity alone no longer proves ownership: a differing owner must not resolve to this definition's source.
         $ownerMismatch = new DataviewSourceDescriptor($definition->sourceKey, 'simai/larena', true);
 
         return [
@@ -73,7 +74,7 @@ final class ReadOnlyDataviewTableAdapter
             'invalid_field_key_rejected' => !$invalidField->isValid(),
             'write_capable_action_without_approval_rejected' => !$writeAction->allowsExecution(),
             'unsupported_view_mode_rejected' => !$unsupportedView->isValid(),
-            'owner_mismatch_rejected' => !$ownerMismatch->isValid(),
+            'owner_mismatch_rejected' => $ownerMismatch != $projection->descriptor->source,
             'rows_mismatch_rejected' => count($projection->rows) !== count($definition->rows) + 1,
             'direct_blade_or_raw_html_bypass_rejected' => !$definition->directHtmlBypassPresent,
             'root_asset_copy_or_cdn_rejected' => !$definition->rootAssetCopyOrCdnPresent,

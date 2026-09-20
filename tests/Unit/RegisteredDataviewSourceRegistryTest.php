@@ -104,7 +104,7 @@ try {
 }
 
 $invalidRegistration = new class implements RegisteredDataviewSourceAdapter {
-    public function descriptor(): DataviewSourceDescriptor { return new DataviewSourceDescriptor('bad.records', 'external/pkg', true); }
+    public function descriptor(): DataviewSourceDescriptor { return new DataviewSourceDescriptor('bad.records', 'not a package', true); }
     public function queryFields(): array { return []; }
     public function searchFields(): array { return []; }
     public function dataset(DataviewQuery $query, string $principalId): DataviewDatasetSnapshot { throw new RuntimeException('must not run'); }
@@ -115,6 +115,48 @@ try {
 } catch (InvalidArgumentException $failure) {
     assert($failure->getMessage() === 'dataview_source_registration_invalid');
 }
+
+// An independently owned external source is valid only when the host declares its owner package.
+$external = new class implements RegisteredDataviewSourceAdapter {
+    public function descriptor(): DataviewSourceDescriptor
+    {
+        return new DataviewSourceDescriptor('examplevendor.catalog', 'example-vendor/larena-dataview-adapter', true);
+    }
+    public function queryFields(): array
+    {
+        return ['record_id' => ['type' => 'identifier', 'operators' => [], 'sortable' => true],
+            'title' => ['type' => 'string', 'operators' => ['eq'], 'sortable' => true]];
+    }
+    public function searchFields(): array { return ['title']; }
+    public function dataset(DataviewQuery $query, string $principalId): DataviewDatasetSnapshot
+    {
+        return new DataviewDatasetSnapshot('sha256:'.str_repeat('b', 64), $this->descriptor(), $query,
+            [['record_id' => 'catalog-1', 'title' => 'Alpha']],
+            new DataviewPagination($query->page, $query->perPage, 1), true);
+    }
+};
+try {
+    new RegisteredDataviewSourceRegistry([$external]);
+    throw new RuntimeException('Untrusted external owner accepted.');
+} catch (InvalidArgumentException $failure) {
+    assert($failure->getMessage() === 'dataview_source_owner_not_trusted');
+}
+foreach (['larena/storage', 'not a package', 7] as $badTrust) {
+    try {
+        new RegisteredDataviewSourceRegistry([$external], [$badTrust]);
+        throw new RuntimeException('Invalid owner trust accepted.');
+    } catch (InvalidArgumentException $failure) {
+        assert($failure->getMessage() === ($badTrust === 'larena/storage'
+            ? 'dataview_source_owner_not_trusted' : 'dataview_source_owner_trust_invalid'));
+    }
+}
+$externalRegistry = new RegisteredDataviewSourceRegistry([$external], ['example-vendor/larena-dataview-adapter']);
+assert($externalRegistry->keys() === ['examplevendor.catalog']);
+$denied = new Larena\Dataview\Exceptions\RegisteredSourceAccessDenied('examplevendor.catalog');
+assert($denied->sourceKey === 'examplevendor.catalog' && $denied->getMessage() === 'dataview_source_access_denied');
+$externalPage = $externalRegistry->dataset('examplevendor.catalog', new DataviewQuery(search: 'Alpha'), 'user:admin_identity:1');
+assert($externalPage->rows === [['record_id' => 'catalog-1', 'title' => 'Alpha']]);
+assert($externalPage->source->isFirstParty() === false);
 
 try {
     new RegisteredDataviewSourceRegistry([new stdClass()]);

@@ -5,6 +5,8 @@
 ### Changed
 
 - Added a fail-closed registered source-adapter contract and registry so domain packages can contribute authorized datasets without Dataview owning their records, permissions or presentation.
+- Allowed an independently owned package to own a registered source, with explicit host-declared owner trust; an undeclared external owner fails closed.
+- Added `RegisteredSourceAccessDenied` for owner-side principal refusals without leaking owner policy.
 
 - Completed Minimal CMS B10 with one access-filtered dataset snapshot projected as table, cards, calendar, kanban, Gantt and tree.
 - Added shared filtering, deterministic sorting, pagination and interaction policy across all six descriptors.

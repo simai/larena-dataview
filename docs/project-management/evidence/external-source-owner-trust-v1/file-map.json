@@ -1,0 +1,18 @@
+{
+  "schema": "larena.evidence_file_map.v1",
+  "base_commit": "5939a33b2eff5d3eaf675ebe595a7c5c55ee6be7",
+  "changed": [
+    ".larena/launch-context.json",
+    "CHANGELOG.md",
+    "docs/developer/registered-source-adapters.md",
+    "docs/project-management/evidence/external-source-owner-trust-v1/**",
+    "docs/project-management/launch-records/external-source-owner-trust-v1.json",
+    "scripts/validate-larena-package.php",
+    "src/Contracts/DataviewSourceDescriptor.php",
+    "src/Exceptions/RegisteredSourceAccessDenied.php",
+    "src/Runtime/ReadOnlyDataviewTableAdapter.php",
+    "src/Runtime/RegisteredDataviewSourceRegistry.php",
+    "tests/Unit/RegisteredDataviewSourceRegistryTest.php"
+  ],
+  "product_source_changed": true
+}

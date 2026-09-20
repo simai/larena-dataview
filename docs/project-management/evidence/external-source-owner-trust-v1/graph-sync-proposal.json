@@ -1,0 +1,8 @@
+{
+  "schema": "larena.graph_sync_proposal.v1",
+  "package": "larena/dataview",
+  "scope": "external registered source owner trust",
+  "feature_refs": ["dataview.source_provider_contract"],
+  "canonical_update_allowed": false,
+  "proposal": "Map this boundary only together with the consuming Root acceptance; package-local tests alone do not raise readiness."
+}

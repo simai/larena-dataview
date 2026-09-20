@@ -23,9 +23,20 @@ final class RegisteredDataviewSourceRegistry
      */
     private array $entries = [];
 
-    /** @param iterable<mixed> $adapters Runtime validation protects container/tag integrations. */
-    public function __construct(iterable $adapters)
+    /**
+     * @param iterable<mixed> $adapters Runtime validation protects container/tag integrations.
+     * @param array<array-key,mixed> $trustedExternalOwners Host-declared package identities allowed to own a
+     *        non-first-party source. Tagging an adapter is not by itself enough; an undeclared owner fails closed.
+     */
+    public function __construct(iterable $adapters, array $trustedExternalOwners = [])
     {
+        $trusted = [];
+        foreach ($trustedExternalOwners as $owner) {
+            if (!is_string($owner) || !DataviewSourceDescriptor::isOwnerPackage($owner)) {
+                throw new InvalidArgumentException('dataview_source_owner_trust_invalid');
+            }
+            $trusted[$owner] = true;
+        }
         $validator = new RegisteredQueryValidator();
         foreach ($adapters as $adapter) {
             if (!$adapter instanceof RegisteredDataviewSourceAdapter) {
@@ -36,6 +47,9 @@ final class RegisteredDataviewSourceRegistry
             $searchFields = $adapter->searchFields();
             if (!$descriptor->isValid()) {
                 throw new InvalidArgumentException('dataview_source_registration_invalid');
+            }
+            if (!$descriptor->isFirstParty() && !isset($trusted[$descriptor->ownerPackage])) {
+                throw new InvalidArgumentException('dataview_source_owner_not_trusted');
             }
             $validator->assertAllowed(new DataviewQuery(), $fields, $searchFields);
             if (isset($this->entries[$descriptor->sourceKey])) {

@@ -3,26 +3,27 @@
   "package": "larena/dataview",
   "repository_class": "continuation_repository",
   "repository_contains_prior_implementation": true,
-  "launch_record_ref": "docs/project-management/launch-records/registered-source-adapter-registry-v1.json",
+  "launch_record_ref": "docs/project-management/launch-records/external-source-owner-trust-v1.json",
   "specs_repo": "simai/larena-specs",
-  "specs_commit": "48e31f41e55d7530a4f80e2672fb738b4a3feaa3",
+  "specs_commit": "2f50ef6e5c0eb6df95b2cdc7910a2d6c4394523d",
   "target_id": "larena.target.minimal_cms_v1",
   "semantic_digest": "sha256:2793f61ba9563839831d57e87ac5cd6399c37a3183f1a68981b6fc7f941a1ad2",
-  "base_commit": "e62bfb5ab44e9f3fb06a7e3f30864f4c2af669fe",
+  "base_commit": "5939a33b2eff5d3eaf675ebe595a7c5c55ee6be7",
   "selected_features": [
     "registered_source_adapter_contract",
-    "registered_source_adapter_registry"
+    "registered_source_external_owner_trust"
   ],
   "allowed_files": [
     ".larena/launch-context.json",
-    "docs/project-management/launch-records/registered-source-adapter-registry-v1.json",
-    "scripts/validate-larena-package.php",
-    "composer.json",
     "CHANGELOG.md",
-    "src/Contracts/RegisteredDataviewSourceAdapter.php",
+    "docs/developer/registered-source-adapters.md",
+    "docs/project-management/launch-records/external-source-owner-trust-v1.json",
+    "scripts/validate-larena-package.php",
+    "src/Contracts/DataviewSourceDescriptor.php",
+    "src/Exceptions/RegisteredSourceAccessDenied.php",
+    "src/Runtime/ReadOnlyDataviewTableAdapter.php",
     "src/Runtime/RegisteredDataviewSourceRegistry.php",
-    "tests/Unit/RegisteredDataviewSourceRegistryTest.php",
-    "docs/developer/registered-source-adapters.md"
+    "tests/Unit/RegisteredDataviewSourceRegistryTest.php"
   ],
   "forbidden_files": [
     "config/*",
@@ -45,13 +46,13 @@
     "deviations.json",
     "graph-sync-proposal.json"
   ],
-  "evidence_path": "docs/project-management/evidence/registered-source-adapter-registry-v1",
-  "graph_sync_proposal_path": "docs/project-management/evidence/registered-source-adapter-registry-v1/graph-sync-proposal.json",
+  "evidence_path": "docs/project-management/evidence/external-source-owner-trust-v1",
+  "graph_sync_proposal_path": "docs/project-management/evidence/external-source-owner-trust-v1/graph-sync-proposal.json",
   "status": "coding_started",
   "coding_allowed": true,
   "coding_started": true,
   "repository_enforcement_installed": true,
   "review_completed": false,
   "next_transition": "tests_recorded",
-  "coding_branch": "codex/registered-source-adapter-registry"
+  "coding_branch": "codex/external-dataview-source-owner"
 }

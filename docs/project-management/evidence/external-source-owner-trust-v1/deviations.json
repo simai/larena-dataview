@@ -1,0 +1,15 @@
+{
+  "schema": "larena.evidence_deviations.v1",
+  "items": [
+    {
+      "id": "owner-prefix-rule-relaxed",
+      "status": "intentional",
+      "reason": "The first-party vendor prefix was an identity-level proxy for trust. Trust is now an explicit host declaration, so an independently owned adapter can be accepted without weakening fail-closed behavior."
+    },
+    {
+      "id": "host-acceptance-pending",
+      "status": "separate_bounded_batch",
+      "reason": "Root wiring, direct HTTP refusals and Chrome lifecycle acceptance are proven in the consuming application batch."
+    }
+  ]
+}

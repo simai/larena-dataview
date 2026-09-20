@@ -26,3 +26,20 @@ Existing `DataviewSourceProvider` and `DataviewPagedSourceProvider` remain valid
 lower-level contracts. An adapter may delegate to the existing
 `DataviewDatasetRuntime` guarded paths rather than reimplement filtering or
 paging.
+
+## Independently owned adapters
+
+An adapter may be owned by a package outside the `larena/` vendor. The owner
+identity is validated as a Composer package name, and `isFirstParty()` reports
+whether it belongs to Larena. Identity alone does not grant trust: the host
+passes the exact external owner packages it accepts as the registry's second
+constructor argument. An adapter whose owner is not declared there fails closed
+with `dataview_source_owner_not_trusted`, and a malformed declaration fails with
+`dataview_source_owner_trust_invalid`. Every other guarantee — access scoping,
+canonical-record refusal, registration, query and snapshot validation — applies
+to external owners unchanged.
+
+An owner that refuses a principal may throw
+`Larena\Dataview\Exceptions\RegisteredSourceAccessDenied` with its source key. The
+exception carries no owner policy or record detail, so a host can answer with a
+denial without learning why.

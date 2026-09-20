@@ -1,0 +1,29 @@
+{
+  "schema": "larena.package_launch_record.v1",
+  "package": "larena/dataview",
+  "goal": "external-source-owner-trust",
+  "status": "coding_started",
+  "base_commit": "5939a33b2eff5d3eaf675ebe595a7c5c55ee6be7",
+  "allowed_files": [
+    ".larena/launch-context.json",
+    "CHANGELOG.md",
+    "docs/developer/registered-source-adapters.md",
+    "docs/project-management/launch-records/external-source-owner-trust-v1.json",
+    "scripts/validate-larena-package.php",
+    "src/Contracts/DataviewSourceDescriptor.php",
+    "src/Exceptions/RegisteredSourceAccessDenied.php",
+    "src/Runtime/ReadOnlyDataviewTableAdapter.php",
+    "src/Runtime/RegisteredDataviewSourceRegistry.php",
+    "tests/Unit/RegisteredDataviewSourceRegistryTest.php"
+  ],
+  "scope": "Allow an independently owned (non-larena vendor) package to own a registered Dataview source, while requiring the host to declare that owner package explicitly. No presentation, permission, migration, Framework or Minimal CMS change.",
+  "specs_candidate": "2f50ef6e",
+  "forbidden": [
+    "live activation",
+    "Framework grammar change",
+    "database migration",
+    "domain authorization ownership",
+    "implicit external owner trust",
+    "production readiness claim"
+  ]
+}
