@@ -21,7 +21,11 @@
     "src/Contracts/DataviewQuery.php",
     "src/Enums/DataviewViewType.php",
     "src/Runtime/DataviewQueryCarryOver.php",
-    "tests/Unit/DataviewQueryCarryOverTest.php"
+    "tests/Unit/DataviewQueryCarryOverTest.php",
+    "src/Runtime/DataviewRoleBinder.php",
+    "src/Contracts/DataviewViewDescriptor.php",
+    "src/Runtime/DataviewDescriptorNormalizer.php",
+    "tests/Unit/DataviewRoleBinderTest.php"
   ],
   "forbidden_files": [
     "config/*",

@@ -52,6 +52,11 @@ final readonly class DataviewDescriptorNormalizer
         if (!$descriptor->isValid()) {
             throw $this->reject('dataview_descriptor_contract_invalid');
         }
+        // Options are the view's role bindings: each must be a role of this view type and be filled by
+        // a field of a type that role accepts.
+        if ((new DataviewRoleBinder())->problems($type, array_column($fields, 'property_type', 'key'), $options) !== []) {
+            throw $this->reject('dataview_descriptor_roles_invalid');
+        }
 
         $normalized = $this->canonicalize([
             'schema' => self::SCHEMA,

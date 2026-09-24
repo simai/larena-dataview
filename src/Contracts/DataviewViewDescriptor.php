@@ -59,13 +59,7 @@ final readonly class DataviewViewDescriptor
     /** @return list<string> */
     private function requiredOptionRoles(): array
     {
-        return match ($this->type) {
-            DataviewViewType::Table => [],
-            DataviewViewType::Cards => ['title'],
-            DataviewViewType::Calendar => ['date'],
-            DataviewViewType::Kanban => ['lane'],
-            DataviewViewType::Gantt => ['start', 'end'],
-            DataviewViewType::Tree => ['id', 'parent'],
-        };
+        // One list of roles: the view type declares them, with the field types they accept.
+        return array_keys(array_filter($this->type->roles(), static fn (array $rule): bool => $rule['required']));
     }
 }

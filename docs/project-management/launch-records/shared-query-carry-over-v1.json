@@ -16,14 +16,19 @@
     "src/Contracts/DataviewQuery.php",
     "src/Enums/DataviewViewType.php",
     "src/Runtime/DataviewQueryCarryOver.php",
-    "tests/Unit/DataviewQueryCarryOverTest.php"
+    "tests/Unit/DataviewQueryCarryOverTest.php",
+    "src/Runtime/DataviewRoleBinder.php",
+    "src/Contracts/DataviewViewDescriptor.php",
+    "src/Runtime/DataviewDescriptorNormalizer.php",
+    "tests/Unit/DataviewRoleBinderTest.php"
   ],
-  "scope": "Widen DataviewQuery to the shared operator vocabulary of every view (relative ranges stay relative and are resolved by the host), let each view type declare which parts of the query it honours, and carry a query to another view type while naming what was dropped. Registered public sources keep validating operators against their own registrations, so their behaviour does not change.",
+  "scope": "Widen DataviewQuery to the shared operator vocabulary of every view (relative ranges stay relative and are resolved by the host), let each view type declare which parts of the query it honours, and carry a query to another view type while naming what was dropped. Registered public sources keep validating operators against their own registrations, so their behaviour does not change. Each view type also declares its field roles and the field types that may fill them; a binding never falls back to an arbitrary field.",
   "requirements": [
     "larena.dataview-view: query-model-shared",
     "larena.dataview-view: relative-ranges-resolved-by-host",
     "larena.dataview-view: view-switch-keeps-what-it-can",
-    "larena.dataview-view: window-matches-the-view"
+    "larena.dataview-view: window-matches-the-view",
+    "larena.dataview-view: roles-typed-and-required"
   ],
   "forbidden": [
     "live activation",
