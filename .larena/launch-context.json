@@ -3,27 +3,25 @@
   "package": "larena/dataview",
   "repository_class": "continuation_repository",
   "repository_contains_prior_implementation": true,
-  "launch_record_ref": "docs/project-management/launch-records/external-source-owner-trust-v1.json",
+  "launch_record_ref": "docs/project-management/launch-records/shared-query-carry-over-v1.json",
   "specs_repo": "simai/larena-specs",
   "specs_commit": "2f50ef6e5c0eb6df95b2cdc7910a2d6c4394523d",
   "target_id": "larena.target.minimal_cms_v1",
   "semantic_digest": "sha256:2793f61ba9563839831d57e87ac5cd6399c37a3183f1a68981b6fc7f941a1ad2",
-  "base_commit": "5939a33b2eff5d3eaf675ebe595a7c5c55ee6be7",
+  "base_commit": "8a18277d455bb9e3df54fdc45660f0cb55802cb8",
   "selected_features": [
     "registered_source_adapter_contract",
     "registered_source_external_owner_trust"
   ],
   "allowed_files": [
     ".larena/launch-context.json",
-    "CHANGELOG.md",
-    "docs/developer/registered-source-adapters.md",
-    "docs/project-management/launch-records/external-source-owner-trust-v1.json",
+    "docs/project-management/launch-records/shared-query-carry-over-v1.json",
     "scripts/validate-larena-package.php",
-    "src/Contracts/DataviewSourceDescriptor.php",
-    "src/Exceptions/RegisteredSourceAccessDenied.php",
-    "src/Runtime/ReadOnlyDataviewTableAdapter.php",
-    "src/Runtime/RegisteredDataviewSourceRegistry.php",
-    "tests/Unit/RegisteredDataviewSourceRegistryTest.php"
+    "composer.json",
+    "src/Contracts/DataviewQuery.php",
+    "src/Enums/DataviewViewType.php",
+    "src/Runtime/DataviewQueryCarryOver.php",
+    "tests/Unit/DataviewQueryCarryOverTest.php"
   ],
   "forbidden_files": [
     "config/*",
@@ -54,5 +52,5 @@
   "repository_enforcement_installed": true,
   "review_completed": false,
   "next_transition": "tests_recorded",
-  "coding_branch": "codex/external-dataview-source-owner"
+  "coding_branch": "codex/table-bulk-all"
 }

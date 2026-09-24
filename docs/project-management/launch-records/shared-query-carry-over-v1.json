@@ -1,0 +1,35 @@
+{
+  "schema": "larena.package_launch_record.v1",
+  "package": "larena/dataview",
+  "goal": "shared-query-carry-over",
+  "status": "coding_started",
+  "base_commit": "8a18277d455bb9e3df54fdc45660f0cb55802cb8",
+  "standards": [
+    "larena.frontend.composition@1.0.0",
+    "larena.dataview-view@1.0.0"
+  ],
+  "allowed_files": [
+    ".larena/launch-context.json",
+    "docs/project-management/launch-records/shared-query-carry-over-v1.json",
+    "scripts/validate-larena-package.php",
+    "composer.json",
+    "src/Contracts/DataviewQuery.php",
+    "src/Enums/DataviewViewType.php",
+    "src/Runtime/DataviewQueryCarryOver.php",
+    "tests/Unit/DataviewQueryCarryOverTest.php"
+  ],
+  "scope": "Widen DataviewQuery to the shared operator vocabulary of every view (relative ranges stay relative and are resolved by the host), let each view type declare which parts of the query it honours, and carry a query to another view type while naming what was dropped. Registered public sources keep validating operators against their own registrations, so their behaviour does not change.",
+  "requirements": [
+    "larena.dataview-view: query-model-shared",
+    "larena.dataview-view: relative-ranges-resolved-by-host",
+    "larena.dataview-view: view-switch-keeps-what-it-can",
+    "larena.dataview-view: window-matches-the-view"
+  ],
+  "forbidden": [
+    "live activation",
+    "Framework grammar change",
+    "database migration",
+    "registered source registration vocabulary change",
+    "production readiness claim"
+  ]
+}

@@ -9,6 +9,15 @@ use InvalidArgumentException;
 final readonly class DataviewQuery
 {
     /**
+     * The shared operator vocabulary of every view. Which of them a field offers is decided by its
+     * type and by the source that evaluates it; relative ranges stay relative here and are resolved
+     * by the host at query time.
+     */
+    public const OPERATORS = ['eq', 'in', 'contains', 'starts_with', 'gt', 'gte', 'lt', 'lte', 'between', 'today', 'week', 'month'];
+
+    public const RELATIVE_OPERATORS = ['today', 'week', 'month'];
+
+    /**
      * @param list<array<string, mixed>> $filters
      * @param list<array<string, mixed>> $sort
      */
@@ -36,9 +45,10 @@ final readonly class DataviewQuery
                 || !is_string($filter['field'])
                 || !is_string($filter['operator'])
                 || !DataviewSourceDescriptor::isStableKey($filter['field'])
-                || !in_array($filter['operator'], ['eq', 'in', 'contains', 'gte', 'lte'], true)
+                || !in_array($filter['operator'], self::OPERATORS, true)
                 || !array_key_exists('value', $filter)
-                || !$this->isFilterValue($filter['value'])) {
+                || !$this->isFilterValue($filter['value'])
+                || !$this->valueFitsOperator($filter['operator'], $filter['value'])) {
                 return false;
             }
         }
@@ -91,6 +101,16 @@ final readonly class DataviewQuery
         }
 
         return $normalized;
+    }
+
+    private function valueFitsOperator(string $operator, mixed $value): bool
+    {
+        return match (true) {
+            in_array($operator, self::RELATIVE_OPERATORS, true) => $value === null,
+            $operator === 'between' => is_array($value) && count($value) === 2,
+            $operator === 'in' => is_array($value) && $value !== [],
+            default => !is_array($value),
+        };
     }
 
     private function isFilterValue(mixed $value): bool
