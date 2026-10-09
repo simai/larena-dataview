@@ -65,6 +65,9 @@ try {
     $incompleteRejected = $exception->getMessage() === 'dataview_six_view_set_incomplete';
 }
 assert($incompleteRejected);
-assert(!is_dir(dirname(__DIR__, 2).'/database'));
+// Dataview owns no source data: its only schema is the descriptor store (owner decision 2026-10-09).
+$schemaFiles = glob(dirname(__DIR__, 2).'/database/*/*') ?: [];
+assert(array_map('basename', $schemaFiles) === ['2026_08_19_000002_create_larena_dataview_descriptor_tables.php']);
+assert(dirname($schemaFiles[0]) === \Larena\Dataview\Persistence\DataviewMigrations::path());
 
 echo "DataviewSixViewRuntimeTest: OK\n";

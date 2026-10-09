@@ -25,7 +25,10 @@
     "src/Runtime/DataviewRoleBinder.php",
     "src/Contracts/DataviewViewDescriptor.php",
     "src/Runtime/DataviewDescriptorNormalizer.php",
-    "tests/Unit/DataviewRoleBinderTest.php"
+    "tests/Unit/DataviewRoleBinderTest.php",
+    "database/migrations/2026_08_19_000002_create_larena_dataview_descriptor_tables.php",
+    "src/Persistence/DataviewMigrations.php",
+    "tests/Unit/DataviewSixViewRuntimeTest.php"
   ],
   "forbidden_files": [
     "config/*",
