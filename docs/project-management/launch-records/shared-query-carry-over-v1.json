@@ -23,7 +23,14 @@
     "tests/Unit/DataviewRoleBinderTest.php",
     "database/migrations/2026_08_19_000002_create_larena_dataview_descriptor_tables.php",
     "src/Persistence/DataviewMigrations.php",
-    "tests/Unit/DataviewSixViewRuntimeTest.php"
+    "tests/Unit/DataviewSixViewRuntimeTest.php",
+    "src/Contracts/DataviewRuntime.php",
+    "src/Providers/DataviewServiceProvider.php",
+    "src/Persistence/PdoDataviewDescriptorStore.php",
+    "tests/Integration/DataviewDescriptorPersistenceTest.php",
+    "tests/Unit/DataviewServiceProviderTest.php",
+    "composer.lock",
+    "scripts/analyse.php"
   ],
   "scope": "Widen DataviewQuery to the shared operator vocabulary of every view (relative ranges stay relative and are resolved by the host), let each view type declare which parts of the query it honours, and carry a query to another view type while naming what was dropped. Registered public sources keep validating operators against their own registrations, so their behaviour does not change. Each view type also declares its field roles and the field types that may fill them; a binding never falls back to an arbitrary field.",
   "requirements": [

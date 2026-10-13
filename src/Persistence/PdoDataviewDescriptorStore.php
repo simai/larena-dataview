@@ -19,12 +19,6 @@ final readonly class PdoDataviewDescriptorStore implements DataviewDescriptorSto
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function install(): void
-    {
-        $this->pdo->exec('CREATE TABLE IF NOT EXISTS larena_dataview_descriptors (scope_ref VARCHAR(128) NOT NULL, view_id VARCHAR(120) NOT NULL, current_revision INTEGER NOT NULL, current_json TEXT NOT NULL, semantic_hash CHAR(64) NOT NULL, updated_by VARCHAR(160) NOT NULL, PRIMARY KEY (scope_ref, view_id))');
-        $this->pdo->exec('CREATE TABLE IF NOT EXISTS larena_dataview_descriptor_versions (scope_ref VARCHAR(128) NOT NULL, view_id VARCHAR(120) NOT NULL, revision INTEGER NOT NULL, document_json TEXT NOT NULL, semantic_hash CHAR(64) NOT NULL, changed_by VARCHAR(160) NOT NULL, PRIMARY KEY (scope_ref, view_id, revision))');
-    }
-
     public function create(array $descriptor, string $actor): DataviewDescriptorRevision
     {
         return $this->persist($descriptor, null, $actor);

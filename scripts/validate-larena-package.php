@@ -115,7 +115,6 @@ if ($codingStarted) {
     $requiredContractFiles = [
         'src/Contracts/DataviewActionPolicy.php',
         'src/Contracts/DataviewFieldDescriptor.php',
-        'src/Contracts/DataviewRuntime.php',
         'src/Contracts/DataviewSavedView.php',
         'src/Contracts/DataviewSourceDescriptor.php',
         'src/Contracts/DataviewViewDescriptor.php',

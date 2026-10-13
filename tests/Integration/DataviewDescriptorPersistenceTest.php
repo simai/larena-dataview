@@ -11,7 +11,16 @@ $path = tempnam(sys_get_temp_dir(), 'larena-dataview-');
 assert(is_string($path));
 $pdo = new PDO('sqlite:'.$path);
 $store = new PdoDataviewDescriptorStore($pdo);
-$store->install();
+// The tables come from the package migration; the store needs them ready and never creates them.
+$missing = new PdoDataviewDescriptorStore(new PDO('sqlite::memory:'));
+try {
+    $missing->read('scope:tenant.alpha', 'workbench.projects.table');
+    throw new RuntimeException('Missing schema accepted.');
+} catch (InvalidArgumentException $exception) {
+    assert($exception->getMessage() === 'dataview_descriptor_persistence_failed');
+}
+$pdo->exec('CREATE TABLE larena_dataview_descriptors (scope_ref VARCHAR(128) NOT NULL, view_id VARCHAR(120) NOT NULL, current_revision INTEGER NOT NULL, current_json TEXT NOT NULL, semantic_hash CHAR(64) NOT NULL, updated_by VARCHAR(160) NOT NULL, PRIMARY KEY (scope_ref, view_id))');
+$pdo->exec('CREATE TABLE larena_dataview_descriptor_versions (scope_ref VARCHAR(128) NOT NULL, view_id VARCHAR(120) NOT NULL, revision INTEGER NOT NULL, document_json TEXT NOT NULL, semantic_hash CHAR(64) NOT NULL, changed_by VARCHAR(160) NOT NULL, PRIMARY KEY (scope_ref, view_id, revision))');
 $created = $store->create(dataviewDescriptor(), 'actor:alpha');
 assert($created->revision === 1);
 $updated = $created->descriptor;

@@ -28,7 +28,14 @@
     "tests/Unit/DataviewRoleBinderTest.php",
     "database/migrations/2026_08_19_000002_create_larena_dataview_descriptor_tables.php",
     "src/Persistence/DataviewMigrations.php",
-    "tests/Unit/DataviewSixViewRuntimeTest.php"
+    "tests/Unit/DataviewSixViewRuntimeTest.php",
+    "src/Contracts/DataviewRuntime.php",
+    "src/Providers/DataviewServiceProvider.php",
+    "src/Persistence/PdoDataviewDescriptorStore.php",
+    "tests/Integration/DataviewDescriptorPersistenceTest.php",
+    "tests/Unit/DataviewServiceProviderTest.php",
+    "composer.lock",
+    "scripts/analyse.php"
   ],
   "forbidden_files": [
     "config/*",
