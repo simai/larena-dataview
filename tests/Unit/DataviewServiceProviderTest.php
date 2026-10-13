@@ -21,7 +21,8 @@ $capsule->addConnection(['driver' => 'sqlite', 'database' => ':memory:', 'prefix
 // The package composes its descriptor store over the application's connection.
 $app = new Container();
 $app->instance(DatabaseManager::class, $capsule->getDatabaseManager());
-(new DataviewServiceProvider($app))->register(); // @phpstan-ignore argument.type
+// A bare container stands in for the application: the provider needs only bindings.
+(new ReflectionClass(DataviewServiceProvider::class))->newInstance($app)->register();
 assert($app->make(DataviewDescriptorStore::class) instanceof PdoDataviewDescriptorStore);
 
 // A host that bound its own store first keeps it.
@@ -35,7 +36,7 @@ $own = new class implements DataviewDescriptorStore {
 $app = new Container();
 $app->instance(DatabaseManager::class, $capsule->getDatabaseManager());
 $app->instance(DataviewDescriptorStore::class, $own);
-(new DataviewServiceProvider($app))->register(); // @phpstan-ignore argument.type
+(new ReflectionClass(DataviewServiceProvider::class))->newInstance($app)->register();
 assert($app->make(DataviewDescriptorStore::class) === $own);
 
 echo "DataviewServiceProviderTest passed.\n";
