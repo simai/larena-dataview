@@ -13,7 +13,7 @@ use Larena\Dataview\Enums\DataviewViewType;
 
 final readonly class DataviewDescriptorNormalizer
 {
-    public const SCHEMA = 'larena.dataview.descriptor.v1';
+    public const SCHEMA = 'larena.dataview.descriptor';
     public const MAX_BYTES = 131_072;
     public const MAX_FIELDS = 100;
 

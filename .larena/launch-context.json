@@ -35,7 +35,8 @@
     "tests/Integration/DataviewDescriptorPersistenceTest.php",
     "tests/Unit/DataviewServiceProviderTest.php",
     "composer.lock",
-    "scripts/analyse.php"
+    "scripts/analyse.php",
+    "tests/Unit/DataviewDescriptorNormalizerTest.php"
   ],
   "forbidden_files": [
     "config/*",

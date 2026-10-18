@@ -29,7 +29,7 @@ echo "DataviewDescriptorNormalizerTest passed.\n";
 function dataviewDescriptor(): array
 {
     return [
-        'schema' => 'larena.dataview.descriptor.v1',
+        'schema' => 'larena.dataview.descriptor',
         'scope_ref' => 'scope:tenant.alpha',
         'view_id' => 'workbench.projects.table',
         'source' => ['key' => 'storage.projects', 'owner_package' => 'larena/storage'],
