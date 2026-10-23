@@ -36,7 +36,12 @@
     "tests/Unit/DataviewServiceProviderTest.php",
     "composer.lock",
     "scripts/analyse.php",
-    "tests/Unit/DataviewDescriptorNormalizerTest.php"
+    "tests/Unit/DataviewDescriptorNormalizerTest.php",
+    "LICENSE",
+    "NOTICE",
+    "AUTHORS",
+    "CITATION.cff",
+    "REUSE.toml"
   ],
   "forbidden_files": [
     "config/*",

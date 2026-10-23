@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you refer to Larena Dataview, please cite it as below."
+title: "Larena Dataview"
+abstract: "Larena Dataview: Universal data presentation layer that can render the same structured dataset as table, kanban, calendar, gantt, cards, tree or other reusable views without reimplementing the same UI for every package."
+type: software
+authors:
+  - family-names: "Zabarov"
+    given-names: "Rim"
+    email: "rim@zabarov.com"
+license: Apache-2.0
+repository-code: "https://github.com/simai/larena-dataview"

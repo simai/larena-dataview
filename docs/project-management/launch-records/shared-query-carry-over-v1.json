@@ -31,7 +31,12 @@
     "tests/Unit/DataviewServiceProviderTest.php",
     "composer.lock",
     "scripts/analyse.php",
-    "tests/Unit/DataviewDescriptorNormalizerTest.php"
+    "tests/Unit/DataviewDescriptorNormalizerTest.php",
+    "LICENSE",
+    "NOTICE",
+    "AUTHORS",
+    "CITATION.cff",
+    "REUSE.toml"
   ],
   "scope": "Widen DataviewQuery to the shared operator vocabulary of every view (relative ranges stay relative and are resolved by the host), let each view type declare which parts of the query it honours, and carry a query to another view type while naming what was dropped. Registered public sources keep validating operators against their own registrations, so their behaviour does not change. Each view type also declares its field roles and the field types that may fill them; a binding never falls back to an arbitrary field.",
   "requirements": [
