@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Declaration hygiene (2026-10-29): the unused `require` of `larena/core` and `larena/property` is dropped; the package names no Larena package in its code.
 - Added a fail-closed registered source-adapter contract and registry so domain packages can contribute authorized datasets without Dataview owning their records, permissions or presentation.
 - Allowed an independently owned package to own a registered source, with explicit host-declared owner trust; an undeclared external owner fails closed.
 - Added `RegisteredSourceAccessDenied` for owner-side principal refusals without leaking owner policy.

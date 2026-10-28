@@ -41,7 +41,9 @@
     "NOTICE",
     "AUTHORS",
     "CITATION.cff",
-    "REUSE.toml"
+    "REUSE.toml",
+    "CHANGELOG.md",
+    "tests/Unit/MinimalCmsDependencyContractTest.php"
   ],
   "forbidden_files": [
     "config/*",

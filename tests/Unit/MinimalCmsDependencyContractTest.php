@@ -12,7 +12,8 @@ $larena = static function (array $dependencies): array {
 
 $actualRequire = $larena($composer['require'] ?? []);
 $actualRequireDev = $larena($composer['require-dev'] ?? []);
-$expectedRequire = ['larena/core','larena/property'];
+// No Larena package is required: the package names none in its code (declaration hygiene 2026-10-29).
+$expectedRequire = [];
 $expectedRequireDev = [];
 
 if ($actualRequire !== $expectedRequire) {

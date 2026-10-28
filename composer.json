@@ -14,9 +14,7 @@
     "php": "^8.3",
     "ext-pdo": "*",
     "illuminate/database": "^13.0",
-    "illuminate/support": "^13.0",
-    "larena/core": "dev-main",
-    "larena/property": "dev-main"
+    "illuminate/support": "^13.0"
   },
   "autoload": {
     "psr-4": {
