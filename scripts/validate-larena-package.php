@@ -58,7 +58,6 @@ if (!$codingStarted) {
 if ($codingStarted) {
     if (!in_array(($launchContext['launch_record_ref'] ?? null), [
         'specs/implementation-planning/launch-records/dataview-batch-1-contract-skeletons-current.json',
-        '/Users/rim/Documents/GitHub/larena/docs/project-management/launch-records/admin-ui-runtime-dataview-pages-users.json',
         'docs/project-management/launch-records/larena-minimal-cms-v1-b2.json',
         'docs/project-management/launch-records/larena-minimal-cms-v1-b10.json',
         'docs/project-management/launch-records/registered-query-boundary-v1.json',
