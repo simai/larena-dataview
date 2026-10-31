@@ -43,6 +43,8 @@
     "CITATION.cff",
     "REUSE.toml",
     "CHANGELOG.md",
+    "tests/Unit/DependencyContractTest.php",
+    "docs/developer/registered-query-boundary.md",
     "tests/Unit/MinimalCmsDependencyContractTest.php"
   ],
   "forbidden_files": [

@@ -56,7 +56,7 @@
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/DataviewDescriptorNormalizerTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Integration/DataviewDescriptorPersistenceTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/DataviewServiceProviderTest.php",
-      "@php tests/Unit/MinimalCmsDependencyContractTest.php",
+      "@php tests/Unit/DependencyContractTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/RegisteredQueryBoundaryTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/RegisteredPagedSourceTest.php",
       "@php -d zend.assertions=1 -d assert.exception=1 tests/Unit/RegisteredSearchTest.php",

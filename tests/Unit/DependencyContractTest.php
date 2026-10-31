@@ -23,4 +23,4 @@ if ($actualRequireDev !== $expectedRequireDev) {
     throw new RuntimeException('Unexpected dataview compatibility dependencies: '.json_encode($actualRequireDev, JSON_THROW_ON_ERROR));
 }
 
-echo "MinimalCmsDependencyContractTest passed.\n";
+echo "DependencyContractTest passed.\n";
