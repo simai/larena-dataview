@@ -24,6 +24,14 @@ assert($binder->bind(DataviewViewType::Gantt, $fields, ['start' => 'deadline'])[
 // An optional role may stay unbound without making the view unavailable.
 assert($binder->bind(DataviewViewType::Table, $fields, []) === ['bindings' => [], 'missing' => []]);
 
+// Cards may bind a cover (a file field); a calendar an end of the start's kind, an all-day flag and a colour.
+$more = $fields + ['photo' => 'file', 'until' => 'datetime', 'whole_day' => 'boolean'];
+assert($binder->bind(DataviewViewType::Cards, $more, ['title' => 'title', 'cover' => 'photo'])['bindings'] === ['title' => 'title', 'cover' => 'photo']);
+assert($binder->problems(DataviewViewType::Cards, $more, ['title' => 'title', 'cover' => 'title']) === ['role_type:cover']);
+$calendar = $binder->bind(DataviewViewType::Calendar, $more, ['date' => 'deadline', 'end' => 'until', 'all_day' => 'whole_day', 'color' => 'status']);
+assert($calendar === ['bindings' => ['date' => 'deadline', 'end' => 'until', 'all_day' => 'whole_day', 'color' => 'status'], 'missing' => []]);
+assert($binder->problems(DataviewViewType::Calendar, $more, ['date' => 'deadline', 'color' => 'price']) === ['role_type:color']);
+
 // Bindings a descriptor carries are checked the same way.
 assert($binder->problems(DataviewViewType::Kanban, $fields, ['lane' => 'status']) === []);
 assert($binder->problems(DataviewViewType::Kanban, $fields, ['lane' => 'price']) === ['role_type:lane']);

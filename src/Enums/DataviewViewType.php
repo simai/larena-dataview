@@ -22,6 +22,12 @@ enum DataviewViewType: string
      * The field roles this view needs and the field types that may fill each of them. A type may be
      * named by its family: "text" admits "text.short" and "text.long".
      *
+     * Cards (C306, CV-4) may bind a `cover`: a file field whose picture tops the card. A calendar (C307, CL-4) may
+     * bind an `end` of the start's kind (a delivery window, a stay of several days), an `all_day` yes/no field (without
+     * it a date field is all-day and a date-time field is timed) and a `color`: a choice field whose option colour the
+     * event takes. The layout options of these views (cover fit and ratio, card fields, size; modes, hours, rules) are
+     * the view's `layouts.cards` and `layouts.calendar` in simai.view-config/1, kept by the source.
+     *
      * @return array<string, array{required: bool, types: list<string>}>
      */
     public function roles(): array
@@ -31,9 +37,14 @@ enum DataviewViewType: string
 
         return match ($this) {
             self::Table => ['title' => ['required' => false, 'types' => $text]],
-            self::Cards => ['title' => ['required' => true, 'types' => $text]],
+            self::Cards => ['title' => ['required' => true, 'types' => $text], 'cover' => ['required' => false, 'types' => ['file']]],
             self::Kanban => ['lane' => ['required' => true, 'types' => ['choice', 'user', 'boolean']]],
-            self::Calendar => ['date' => ['required' => true, 'types' => $dates]],
+            self::Calendar => [
+                'date' => ['required' => true, 'types' => $dates],
+                'end' => ['required' => false, 'types' => $dates],
+                'all_day' => ['required' => false, 'types' => ['boolean']],
+                'color' => ['required' => false, 'types' => ['choice']],
+            ],
             self::Gantt => ['start' => ['required' => true, 'types' => $dates], 'end' => ['required' => true, 'types' => $dates]],
             self::Tree => [
                 'id' => ['required' => true, 'types' => ['string', 'integer', 'identifier']],
@@ -43,8 +54,9 @@ enum DataviewViewType: string
     }
 
     /**
-     * What part of the shared query this view can honour. A list pages through records; a calendar
-     * or a timeline asks for a range over its date roles instead. Filtering a tree would cut
+     * What part of the shared query this view can honour. A list pages through records (cards: 24 a
+     * page); a calendar or a timeline asks for a range over its date roles instead (the days on screen,
+     * up to 1000 records, the undated ones asked apart). Filtering a tree would cut
      * branches from their parents, so a tree searches but does not filter.
      *
      * @return array{filters: bool, search: bool, sort: bool, window: 'page'|'range'}
