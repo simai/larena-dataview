@@ -70,4 +70,12 @@ $schemaFiles = glob(dirname(__DIR__, 2).'/database/*/*') ?: [];
 assert(array_map('basename', $schemaFiles) === ['2026_08_19_000002_create_larena_dataview_descriptor_tables.php']);
 assert(dirname($schemaFiles[0]) === \Larena\Dataview\Persistence\DataviewMigrations::path());
 
+// The layouts of simai.view-config/1: a kanban opens as a board; a gantt has none of its own in version 1.
+assert(array_map(static fn (DataviewViewType $type): ?string => $type->layout(), DataviewViewType::cases())
+    === ['table', 'board', 'calendar', null, 'cards', 'tree']);
+foreach (DataviewViewType::cases() as $type) {
+    assert($type->layout() === null || DataviewViewType::fromLayout($type->layout()) === $type);
+}
+assert(DataviewViewType::fromLayout('list') === null && DataviewViewType::fromLayout('timeline') === null);
+
 echo "DataviewSixViewRuntimeTest: OK\n";

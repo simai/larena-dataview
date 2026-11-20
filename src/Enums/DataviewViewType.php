@@ -13,6 +13,26 @@ enum DataviewViewType: string
     case Cards = 'cards';
     case Tree = 'tree';
 
+    /**
+     * The layout a view of this type opens in, in the words of simai.view-config/1 (`table`, `board`, `cards`,
+     * `calendar`, `list`, `tree`): a kanban is a `board`; a gantt has no layout of its own in version 1 (`timeline`
+     * is a reserved name there), so it answers null and its view keeps its type beside the layout.
+     */
+    public function layout(): ?string
+    {
+        return match ($this) {
+            self::Kanban => 'board',
+            self::Gantt => null,
+            default => $this->value,
+        };
+    }
+
+    /** The type of a simai.view-config/1 layout: null for `list` and for a name the view does not know. */
+    public static function fromLayout(string $layout): ?self
+    {
+        return $layout === 'board' ? self::Kanban : (in_array($layout, ['table', 'cards', 'calendar', 'tree'], true) ? self::from($layout) : null);
+    }
+
     public function isAdvanced(): bool
     {
         return in_array($this, [self::Gantt], true);
