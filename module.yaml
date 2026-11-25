@@ -20,3 +20,15 @@ runtime:
   laravel: "^13.0"
 evidence:
   path: docs/project-management/evidence/larena-minimal-cms-v1-b10
+delivery:
+  publisher: simai
+  distribution: open
+  license: Apache-2.0
+  requires:
+    larena: dev-main
+    packages: {}
+  capabilities:
+    - larena.capability.dataview.base
+  requires_capabilities: []
+  data_on_removal: kept_read_only
+  migrations_reversible: true

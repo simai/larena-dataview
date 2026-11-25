@@ -45,7 +45,9 @@
     "CHANGELOG.md",
     "tests/Unit/DependencyContractTest.php",
     "docs/developer/registered-query-boundary.md",
-    "tests/Unit/MinimalCmsDependencyContractTest.php"
+    "tests/Unit/MinimalCmsDependencyContractTest.php",
+    "module.yaml",
+    "scripts/check-delivery-manifest.php"
   ],
   "forbidden_files": [
     "config/*",
